@@ -1,0 +1,526 @@
+/* ==========================================
+   APPLE INSPIRED LIQUID GLASS THEME (DARK & LIGHT)
+========================================== */
+
+/* DEFAULT (DARK MODE VARIABLE SCHEME) */
+:root {
+    --bg-base: #030305;
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1a6;
+    
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-highlight: rgba(255, 255, 255, 0.15);
+    
+    --accent-blue: #0A84FF;
+    --accent-teal: #00ffcc;
+    --accent-purple: #BF5AF2;
+    
+    --blob-1: #0044ff;
+    --blob-2: #BF5AF2;
+    --blob-3: #00ffcc;
+    
+    --card-bg: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+    --input-bg: rgba(0,0,0,0.4);
+    --nav-blur-bg: rgba(10, 10, 12, 0.6);
+    --badge-color: #ffffff;
+    
+    /* NEW: Deep Shadows for separation and hover */
+    --card-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 1px 5px rgba(0,0,0,0.2);
+    --card-shadow-hover: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(10, 132, 255, 0.2);
+    
+    --font-main: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+    --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* LIGHT MODE OVERRIDES */
+[data-theme="light"] {
+    --bg-base: #f5f5f7;
+    --text-primary: #1d1d1f;
+    --text-secondary: #515154;
+    
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(0, 0, 0, 0.09);
+    --glass-highlight: rgba(0, 0, 0, 0.18);
+    
+    --accent-blue: #0066cc;
+    --accent-teal: #00a884;
+    --accent-purple: #af52de;
+    
+    --blob-1: #cce3ff;
+    --blob-2: #f3e5ff;
+    --blob-3: #e8fffb;
+    
+    --card-bg: linear-gradient(145deg, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.4) 100%);
+    --input-bg: rgba(255,255,255,0.85);
+    --nav-blur-bg: rgba(245, 245, 247, 0.65);
+    --badge-color: #1d1d1f;
+    
+    /* NEW: Light Mode Shadows */
+    --card-shadow: 0 10px 30px rgba(0,0,0,0.06), 0 1px 5px rgba(0,0,0,0.03);
+    --card-shadow-hover: 0 20px 40px rgba(0,0,0,0.12), 0 0 20px rgba(0, 102, 204, 0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Base Dynamic Colors */
+h1, h2, h3, h4, h5, h6, .hero-title, .timeline-item h4, .skills-main h3, .section-heading, .glass-card h3 {
+    color: var(--text-primary) !important;
+    transition: color 0.5s ease;
+}
+
+/* ==========================================
+   AURORA MESH BACKGROUND
+========================================== */
+.bg-mesh {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1; overflow: hidden; background: var(--bg-base);
+    transition: background-color 0.5s ease;
+}
+.blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(140px); opacity: 0.45;
+    animation: float 20s infinite alternate;
+}
+.blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--blob-1); transition: background-color 0.5s ease; }
+.blob-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: var(--blob-2); animation-delay: -5s; transition: background-color 0.5s ease; }
+.blob-3 { top: 40%; left: 40%; width: 30vw; height: 30vw; background: var(--blob-3); animation-delay: -10s; opacity: 0.25; transition: background-color 0.5s ease; }
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(100px, 150px) scale(1.15); }
+}
+
+/* ==========================================
+   LIQUID GLASS COMPONENTS & HOVER EFFECTS
+========================================== */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+/* UPDATED: Container styling with Shadows and Hover */
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px; padding: 2.5rem;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition), background-color 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+    transform-style: preserve-3d; 
+}
+
+/* Hover Effect: Border changes to Blue, Shadow Glows */
+.glass-card:hover {
+    border-color: var(--accent-blue);
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-5px); /* Smooth lift effect */
+}
+
+.tilt-card > * { transform: translateZ(30px); }
+
+/* LIQUID BUTTONS */
+.liquid-btn, .liquid-btn-small {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: rgba(128,128,128,0.1); 
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary); text-decoration: none;
+    transition: var(--transition), background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+    cursor: pointer; overflow: hidden; position: relative;
+}
+.liquid-btn { padding: 14px 28px; border-radius: 30px; font-size: 1rem; font-weight: 500; }
+.liquid-btn-small { padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; }
+.icon-btn { width: 50px; height: 50px; padding: 0; border-radius: 50%; font-size: 1.2rem; }
+
+.liquid-btn::before, .liquid-btn-small::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+.liquid-btn:hover::before, .liquid-btn-small:hover::before { left: 100%; }
+
+.liquid-btn:hover, .liquid-btn-small:hover {
+    background: rgba(128,128,128,0.2);
+    border-color: var(--glass-highlight);
+    transform: scale(1.02);
+}
+
+.liquid-btn.primary { background: var(--text-primary); color: var(--bg-base); border: none; font-weight: 600;}
+.liquid-btn.primary:hover { opacity: 0.9; }
+.outline-btn { border-color: var(--accent-blue); color: var(--accent-blue); background: transparent; }
+.outline-btn:hover { background: rgba(10, 132, 255, 0.1); border-color: var(--accent-teal); color: var(--accent-teal);}
+.theme-toggle { background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+/* ==========================================
+   LAYOUT & NAVIGATION
+========================================== */
+.container { max-width: 1150px; margin: 0 auto; padding: 0 2rem; }
+.section { padding: 120px 0; }
+.pt-0 { padding-top: 0 !important; }
+.section-heading { font-size: 2.8rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -1px; }
+.section-subheading { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 3rem; max-width: 600px; }
+
+.glass-nav {
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    width: 95%; max-width: 850px; border-radius: 30px;
+    background: var(--nav-blur-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border); z-index: 1000;
+    transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+.nav-container { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; }
+.logo-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+.logo-icon svg { width: 100%; height: 100%; transition: transform 0.3s ease; }
+.logo-icon:hover svg { transform: rotate(15deg) scale(1.1); }
+.nav-links { display: flex; gap: 20px; list-style: none; align-items: center; }
+.nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; }
+.nav-links a:hover { color: var(--text-primary); }
+
+/* ==========================================
+   HERO 2-COLUMN DESIGN
+========================================== */
+.hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
+.hero-container {
+    display: grid; 
+    grid-template-columns: 1.2fr 1fr; 
+    gap: 3rem; 
+    align-items: center; 
+    width: 100%;
+}
+.hero-content { text-align: left; }
+.badge { display: inline-block; padding: 8px 20px; border-radius: 20px; font-size: 0.9rem; margin-bottom: 25px; color: var(--badge-color); font-weight: 500; box-shadow: var(--card-shadow);}
+.badge i { margin-right: 8px; color: var(--accent-blue); }
+.hero-title { font-size: clamp(3.2rem, 5vw, 5.5rem); font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 25px; }
+.gradient-text { background: linear-gradient(120deg, var(--accent-blue), var(--accent-teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-subtitle { font-size: 1.2rem; color: var(--text-secondary); max-width: 650px; margin: 0 0 40px 0; transition: color 0.5s ease; }
+.hero-cta { display: flex; gap: 15px; justify-content: flex-start; }
+
+/* ==========================================
+   CIRCULAR NEON GLOW PROFILE STYLING
+========================================== */
+.hero-image-wrapper {
+    display: flex; justify-content: center; align-items: center; 
+    position: relative; padding: 20px; height: auto;
+}
+
+.image-glass-frame {
+    position: relative; 
+    width: 320px; 
+    height: 320px; 
+    border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center; 
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 20px 60px rgba(0, 255, 204, 0.15);
+    transform-style: preserve-3d;
+    transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+.image-glass-frame:hover {
+    border-color: var(--accent-blue);
+}
+
+.image-glass-frame::after {
+    content: ''; 
+    position: absolute; 
+    inset: -4px; 
+    border-radius: 50%; 
+    background: linear-gradient(45deg, var(--accent-blue), var(--accent-teal), var(--accent-purple), var(--accent-blue));
+    background-size: 200% 200%;
+    z-index: -1; 
+    animation: neon-spin 4s linear infinite;
+    filter: drop-shadow(0 0 15px rgba(0, 255, 204, 0.4)); 
+}
+
+@keyframes neon-spin {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.profile-img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    border-radius: 50%; 
+    position: relative; 
+    z-index: 2; 
+    transform: translateZ(30px); 
+    border: 4px solid var(--bg-base); 
+    transition: border-color 0.5s ease;
+    filter: contrast(1.05) drop-shadow(0 15px 25px rgba(0,0,0,0.6)); 
+}
+
+.floating-badge {
+    position: absolute; width: 60px; height: 60px; border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center; font-size: 1.8rem; 
+    z-index: 3; transform: translateZ(50px); 
+    background: rgba(128,128,128,0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+    animation: float-badge 3s ease-in-out infinite alternate;
+}
+.badge-1 { top: 10px; right: -5px; color: var(--accent-blue); }
+.badge-2 { bottom: 20px; left: -5px; color: var(--accent-teal); animation-delay: 1.5s; }
+
+@keyframes float-badge {
+    0% { transform: translateY(0) translateZ(50px); }
+    100% { transform: translateY(-20px) translateZ(50px); }
+}
+
+/* ==========================================
+   ABOUT, SKILLS & INTERESTS
+========================================== */
+.about-wrapper { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem; }
+.about-text { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.05rem; transition: color 0.5s ease; }
+.about-text strong { color: var(--text-primary); font-weight: 600; }
+.tech-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+.tech-tags span { background: rgba(128,128,128,0.08); color: var(--text-primary); padding: 8px 16px; border-radius: 12px; font-size: 0.9rem; border: 1px solid var(--glass-border); font-weight: 500; transition: background-color 0.5s ease, color 0.5s ease;}
+.tag-outline { background: transparent !important; border-color: var(--text-secondary) !important; color: var(--text-secondary) !important; }
+
+.interests-card h3 { margin-bottom: 1.5rem; font-size: 1.2rem; }
+.interest-grid { display: flex; flex-wrap: wrap; gap: 15px; }
+
+/* UPDATED: Interest Item Hover */
+.interest-item { 
+    background: linear-gradient(145deg, rgba(128,128,128,0.04), transparent); 
+    color: var(--text-primary); 
+    border: 1px solid var(--glass-border); 
+    padding: 12px 24px; border-radius: 15px; 
+    font-size: 1rem; display: flex; align-items: center; gap: 10px; 
+    transition: var(--transition), color 0.5s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.interest-item:hover {
+    border-color: var(--accent-teal);
+    box-shadow: 0 5px 15px rgba(0, 255, 204, 0.15);
+    transform: translateY(-3px);
+}
+
+/* ==========================================
+   EDUCATION & TIMELINE
+========================================== */
+.timeline { display: flex; flex-direction: column; gap: 2rem; position: relative;}
+.timeline-item { position: relative; padding-left: 2rem; }
+.timeline-date { color: var(--accent-teal); font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; font-family: monospace; transition: color 0.5s ease;}
+.timeline-item .role { color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 12px; font-weight: 500; transition: color 0.5s ease; }
+.timeline-item .desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; transition: color 0.5s ease;}
+
+/* ==========================================
+   CERTIFICATIONS
+========================================== */
+.cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.cert-card { display: flex; flex-direction: column; align-items: flex-start; }
+.cert-icon { font-size: 2.5rem; color: var(--accent-blue); margin-bottom: 1.5rem; transition: color 0.5s ease; }
+.cert-card p { color: var(--text-secondary); margin-bottom: 25px; font-size: 0.95rem; flex-grow: 1; transition: color 0.5s ease; }
+
+/* ==========================================
+   PROJECTS SECTION GRID (BOX DESIGN FIXED)
+========================================== */
+.project-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 2rem; 
+    margin-top: 3rem; 
+    align-items: stretch; 
+}
+
+.project-card { 
+    display: flex; 
+    flex-direction: column; 
+    height: 100%; 
+}
+
+.card-icon { 
+    font-size: 2rem; 
+    color: var(--accent-teal); 
+    margin-bottom: 1.5rem; 
+}
+
+.project-card p {
+    flex-grow: 1; 
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+}
+
+/* FIX: Yahan boxes ka design wapas add kar diya hai */
+.project-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto; 
+}
+
+.project-tags-container span { 
+    background: rgba(128,128,128,0.08); 
+    color: var(--text-primary); 
+    padding: 8px 16px; 
+    border-radius: 12px; 
+    font-size: 0.9rem; 
+    border: 1px solid var(--glass-border); 
+    font-weight: 500;
+}
+
+/* ==========================================
+   CONTACT SECTION
+========================================== */
+.contact-wrapper { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; }
+.contact-info p { color: var(--text-secondary); margin: 15px 0 30px; font-size: 1.05rem; transition: color 0.5s ease;}
+.social-links { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 30px; }
+.direct-contact-item { font-family: monospace; font-size: 1rem; color: var(--text-secondary); display: flex; align-items: center; gap: 10px; margin-bottom: 10px; transition: color 0.5s ease;}
+.direct-contact-item i { color: var(--accent-teal); transition: color 0.5s ease; }
+
+.contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+
+/* UPDATED: Glass Input Hover */
+.glass-input {
+    resize: none !important;
+    width: 100%; background: var(--input-bg); border: 1px solid var(--glass-border);
+    padding: 16px 20px; border-radius: 12px; color: var(--text-primary); font-family: var(--font-main);
+    font-size: 1rem; transition: var(--transition), background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease; outline: none;
+}
+.glass-input::placeholder { color: var(--text-secondary); }
+.glass-input:hover { border-color: rgba(128,128,128,0.3); }
+.glass-input:focus { border-color: var(--accent-blue); box-shadow: 0 0 0 4px rgba(10, 132, 255, 0.1); }
+.w-100 { width: 100%; }
+
+/* Footer Professional Styling */
+.footer {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--glass-border);
+    margin-top: 50px;
+}
+
+.footer-content p {
+    margin: 5px 0;
+}
+
+.footer-tagline {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* ==========================================
+   RESPONSIVE LAYOUTS
+========================================== */
+@media (max-width: 900px) {
+    .hero-container { grid-template-columns: 1fr; text-align: center; margin-top: 50px; }
+    .hero-content { order: 2; }
+    .hero-cta { justify-content: center; }
+    .hero-subtitle { margin: 0 auto 40px; }
+    
+    .hero-image-wrapper { order: 1; margin-bottom: 2rem; height: auto; padding-top: 40px; }
+    .image-glass-frame { width: 280px; height: 280px; }
+    
+    .about-wrapper, .contact-wrapper { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero-title { font-size: 3rem; }
+    .glass-nav { width: 90%; }
+}
+
+/* ==========================================
+   SKILLS & LANGUAGES SPACING - FIXED
+========================================== */
+
+/* Headings ka gap fix */
+.skills-main h3 {
+    margin-bottom: 15px !important; 
+    margin-top: 10px;               
+    font-size: 1.2rem;
+    color: var(--text-primary);
+}
+
+/* Languages heading aur uske upar ka gap */
+.skills-main h3:not(:first-child) {
+    margin-top: 30px !important;    
+    margin-bottom: 15px !important; 
+}
+
+/* Box (Tags) ka gap fix */
+.skills-main .tech-tags {
+    margin-bottom: 25px !important; /* Tags ke niche gap badhaya */
+    gap: 12px;                      /* Tags ke aapas mein gap */
+}
+
+/* Tags ka padding fix */
+.skills-main .tech-tags span {
+    padding: 10px 18px !important;  /* Tags ko thoda bada aur sundar look */
+}
+
+/* ==========================================
+   FIX: EMAIL BREAKING & NAVBAR VISIBLE
+========================================== */
+@media (max-width: 768px) {
+    /* Sirf email box ko target karo, pooray page ko nahi */
+    .contact-info .direct-contact-item {
+        word-break: break-all !important; /* Email ko zabardasti tod dega */
+        display: block !important;
+        width: 100% !important;
+        white-space: normal !important;
+    }
+}
+
+    /* ==========================================
+   RESPONSIVE DESIGN (MOBILE FIXES)
+========================================== */
+@media (max-width: 768px) {
+    /* Logo aur links ko align karne ke liye flex use karein */
+    .nav-container {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0 10px !important;
+    }
+
+    /* Logo ka size chhota karein taaki wo dikhe */
+    .logo-icon {
+        display: block !important;
+        width: 35px !important; /* Size set kar diya */
+        flex-shrink: 0;
+    }
+
+    /* Links ka size aur gap adjust karein */
+    .nav-links {
+        display: flex !important;
+        gap: 7px !important;
+        font-size: 0.7rem !important;
+        margin: 0 !important;
+    }
+}
+/* 1. Horizontal Jitter (Screen ka left-right hilna) band karne ke liye */
+html, body {
+    overflow-x: hidden; 
+    width: 100%;
+    overscroll-behavior-y: none;
+}
+
+/* 2. GPU (Hardware) Acceleration Force karne ke liye */
+.contact-wrapper, .project-card, .glass-container, header, footer {
+    will-change: transform, opacity;
+    transform: translateZ(0); 
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* 3. Text rendering ko smooth banane ke liye */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
