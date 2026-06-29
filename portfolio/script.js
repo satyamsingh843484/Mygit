@@ -25,7 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
             speed: 400,       
             glare: true,      
             "max-glare": 0.15, 
-            scale: 1.02       
+            scale: 1.02,
+            gyroscope: false       
         });
     }
 
