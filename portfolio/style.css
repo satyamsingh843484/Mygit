@@ -513,4 +513,9 @@ h1, h2, h3, h4, h5, h6, .hero-title, .timeline-item h4, .skills-main h3, .sectio
         -webkit-transform: translateZ(0);
         will-change: transform, opacity;
     }
+    /* 3. Scrolling ko smooth banane ke liye */
+    html, body {
+        overscroll-behavior-y: none;
+        -webkit-overflow-scrolling: touch;
+    }
 }
