@@ -502,25 +502,3 @@ h1, h2, h3, h4, h5, h6, .hero-title, .timeline-item h4, .skills-main h3, .sectio
         margin: 0 !important;
     }
 }
-/* 1. Horizontal Jitter (Screen ka left-right hilna) band karne ke liye */
-html, body {
-    overflow-x: hidden; 
-    width: 100%;
-    overscroll-behavior-y: none;
-}
-
-/* 2. GPU (Hardware) Acceleration Force karne ke liye */
-.contact-wrapper, .project-card, .glass-container, header, footer {
-    will-change: transform, opacity;
-    transform: translateZ(0); 
-    -webkit-transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    perspective: 1000px;
-}
-
-/* 3. Text rendering ko smooth banane ke liye */
-* {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
